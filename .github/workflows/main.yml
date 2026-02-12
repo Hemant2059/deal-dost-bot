@@ -1,0 +1,27 @@
+name: DealDost AutoPoster
+
+on:
+  schedule:
+    - cron: "*/30 * * * *" # This tells GitHub to run the bot every 30 minutes
+  workflow_dispatch: # This adds a manual "Run" button for testing
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install Libraries
+        run: pip install -r requirements.txt
+
+      - name: Execute Bot
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GOOGLE_JSON: ${{ secrets.GOOGLE_JSON }}
+        run: python bot.py
