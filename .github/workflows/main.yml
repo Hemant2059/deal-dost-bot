@@ -1,26 +1,22 @@
-name: DealDost AutoPoster
+name: DealDost 5Min Poster
 
 on:
   schedule:
-    - cron: "*/30 * * * *" # This tells GitHub to run the bot every 30 minutes
-  workflow_dispatch: # This adds a manual "Run" button for testing
+    - cron: "*/5 * * * *" # Runs every 5 minutes
+  workflow_dispatch: # Manual button
 
 jobs:
-  run-bot:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
+      - uses: actions/checkout@v3
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
-
-      - name: Install Libraries
-        run: pip install -r requirements.txt
-
-      - name: Execute Bot
+      - name: Install dependencies
+        run: pip install gspread google-auth requests
+      - name: Run bot
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           GOOGLE_JSON: ${{ secrets.GOOGLE_JSON }}
