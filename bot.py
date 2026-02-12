@@ -12,8 +12,8 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN")
 GOOGLE_JSON = json.loads(os.environ.get("GOOGLE_JSON")) 
 
 CHANNELS = ["@LootDealsDost"]
-SHEET_NAME = "LootDeals"
-WORKSHEET_NAME = "deals"
+SHEET_NAME = "DealDost"  # The name of the Google Sheet file
+WORKSHEET_NAME = "deals" # The name of the tab at the bottom
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
